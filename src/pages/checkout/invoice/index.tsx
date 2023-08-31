@@ -33,30 +33,30 @@ export default function Checkout() {
                 <tbody>
                   <tr className="bg-white">
                     <td className="font-bold">BILLED TO:</td>
-                    <td>{billingDetails?.companyName}</td>
+                    <td>{billingDetails?.companyName.toUpperCase()}</td>
                   </tr>
                   <tr className="bg-white">
                     <td className="font-bold">PAY TO:</td>
                     <td>
-                      {billingDetails?.firstName} {billingDetails?.lastName}
+                      {billingDetails?.firstName.toUpperCase()} {billingDetails?.lastName.toUpperCase()}
                     </td>
                   </tr>
                   <tr className="bg-white">
                     <td></td>
                     <td>
-                      {billingDetails?.townName}
+                      {billingDetails?.selectedTown.toUpperCase()}
                       {", "}
-                      {billingDetails?.zipCode}
+                      {billingDetails?.selectedZipCode.toUpperCase()}
                     </td>
                   </tr>
                   <tr className="bg-white">
                     <td></td>
-                    <td>{billingDetails?.province}{", "}
-                      {billingDetails?.country}</td>
+                    <td>{billingDetails?.selectedProvince.toUpperCase()}{", "}
+                      {billingDetails?.selectedCountry.toUpperCase()}</td>
                   </tr>
                   <tr className="bg-white">
                     <td className="font-normal">Payment Type:</td>
-                    <td>{billingDetails?.typePayment}</td>
+                    <td>{billingDetails?.typePayment.toUpperCase()}</td>
                   </tr>
                 </tbody>
               </table>
@@ -80,7 +80,7 @@ export default function Checkout() {
                 </thead>
                 <tbody>
                   <tr className="bg-white border-b">
-                    <td className="py-4">{itemCart?.label}</td>
+                    <td className="py-4">{itemCart?.label.toUpperCase()}</td>
                     <td className="py-4">{qty}</td>
                     <td className="py-4">{subtotal}</td>
                   </tr>

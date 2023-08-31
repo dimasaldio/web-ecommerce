@@ -31,10 +31,10 @@ export interface IBillingDetails {
   firstName: string;
   lastName: string;
   companyName: string;
-  country: string;
-  townName: string;
-  province: string;
-  zipCode: string;
+  selectedCountry: string;
+  selectedTown: string;
+  selectedProvince: string;
+  selectedZipCode: string;
   phone: string;
   email: string;
   typePayment: string;

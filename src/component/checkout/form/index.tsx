@@ -41,31 +41,34 @@ const FormCheckout: React.FC<FormProps> = ({
       lastName,
       country,
       companyName,
-      townName,
+      town,
       zipCode,
       province,
       phone,
       email,
+      typePayment
     } = values;
     const billingDetails = {
       firstName,
       lastName,
-      country,
+      selectedCountry,
       companyName,
-      townName,
-      zipCode,
-      province,
+      selectedTown,
+      selectedZipCode,
+      selectedProvince,
       phone,
       email,
+      typePayment
     };
     localStorage.setItem("billingDetails", JSON.stringify(billingDetails));
-    message.success("Pembelian berhasil", 1);
+    message.success("Pembelian berhasil", 2);
     window.open("/checkout/invoice", "_blank");
     window.location.href = "/";
   };
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("First Name is required"),
     lastName: Yup.string().required("Last Name is required"),
+    companyName: Yup.string().required("Company Name is required"),
     phone: Yup.string().required("Phone is required"),
     email: Yup.string().required("Email is required"),
     typePayment: Yup.string().required("Type Payment is required"),
@@ -124,13 +127,18 @@ const FormCheckout: React.FC<FormProps> = ({
                 htmlFor="companyName"
                 className="block mb-[5px] md:mb-2 text-[0.5rem] md:text-[1rem] font-medium text-gray-900"
               >
-                Company Name (Optional)
+                Company Name
               </label>
               <Field
                 type="text"
                 name="companyName"
                 className="border border-gray-300 text-gray-900 text-[0.5rem] md:text-[1rem] rounded-lg block w-full p-[5px] md:p-[10px]"
               />
+              <ErrorMessage
+                  name="companyName"
+                  component="div"
+                  className="text-red-500 text-[0.5rem] md:text-[1rem]"
+                />
             </div>
             <div className="my-2 md:my-4">
               <label
