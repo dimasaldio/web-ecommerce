@@ -8,7 +8,7 @@ interface ILayout {
 
 export default function Layout(props: ILayout) {
   return (
-    <div className="md:px-8">
+    <div className="bg-white">
       <Navbar />
       <main>{props.children}</main>
       <Footer />

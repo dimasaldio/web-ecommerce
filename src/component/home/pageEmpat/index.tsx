@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import React from "react";
 import { Carousel } from "antd";
@@ -26,14 +27,14 @@ const PageEmpat: React.FC<ProductList> = ({productList}) => {
             </button>
           </Link>
         </div>
-        <div className="col-span-2 md:mt-8">
+        <div className="col-span-2 md:mt-8 ">
           <Carousel autoplay>
             {productList.map((items:IProduct, index:number) => (
-              <div key={index}>
+              <div key={index} className="overflow-hidden w-[200px] h-[300px] md:w-[300px] md:h-[600px]">
                 <img
                   width={1000}
                   height={1000}
-                  className="w-full h-auto"
+                  className="w-full h-full"
                   src={items?.image[0]}
                   alt={items?.label}
                 />

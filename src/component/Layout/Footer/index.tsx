@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div className="w-full h-auto bg-white">
+    <div className="w-full bg-white">
       <div className="grid grid-cols-3 text-black py-4 px-8 gap-2">
         <div>
           <p className="font-bold text-[0.5rem] md:text-[2rem]">Funiro</p>

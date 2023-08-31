@@ -21,14 +21,19 @@ const FormCheckout: React.FC<FormProps> = ({
   subtotal,
 }) => {
   const [formData, setFormData] = useState(formsData);
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { id, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [id]: value,
-    }));
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedTown, setSelectedTown] = useState('')
+  const [selectedProvince, setSelectedProvince] = useState('')
+  const [selectedZipCode, setSelectedZipCode] = useState('')
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedCountry = e.target.value;
+    setSelectedCountry(selectedCountry);
+    const selectedCountryData = mappedListCountries.find(country => country.name === selectedCountry);
+    if (selectedCountryData) {
+      setSelectedTown(selectedCountryData.towns[0]?.name || ''); 
+      setSelectedProvince(selectedCountryData.towns[0]?.province || '');
+      setSelectedZipCode(selectedCountryData.towns[0]?.zipCode || '');
+    }
   };
   const handleCheckout = (values: any) => {
     const {
@@ -61,13 +66,9 @@ const FormCheckout: React.FC<FormProps> = ({
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("First Name is required"),
     lastName: Yup.string().required("Last Name is required"),
-    country: Yup.string().required("Country is required"),
-    townName: Yup.string().required("Town is required"),
-    province: Yup.string().required("Province is required"),
-    zipCode: Yup.string().required("Zip Code is required"),
     phone: Yup.string().required("Phone is required"),
     email: Yup.string().required("Email is required"),
-    typePayment: Yup.string().required("typePayment is required"),
+    typePayment: Yup.string().required("Type Payment is required"),
   });
 
   return (
@@ -96,7 +97,7 @@ const FormCheckout: React.FC<FormProps> = ({
                 <ErrorMessage
                   name="firstName"
                   component="div"
-                  className="text-red-500"
+                  className="text-red-500 text-[0.5rem] md:text-[1rem]"
                 />
               </div>
               <div>
@@ -114,7 +115,7 @@ const FormCheckout: React.FC<FormProps> = ({
                 <ErrorMessage
                   name="lastName"
                   component="div"
-                  className="text-red-500"
+                  className="text-red-500 text-[0.5rem] md:text-[1rem]"
                 />
               </div>
             </div>
@@ -129,7 +130,6 @@ const FormCheckout: React.FC<FormProps> = ({
                 type="text"
                 name="companyName"
                 className="border border-gray-300 text-gray-900 text-[0.5rem] md:text-[1rem] rounded-lg block w-full p-[5px] md:p-[10px]"
-                
               />
             </div>
             <div className="my-2 md:my-4">
@@ -144,6 +144,8 @@ const FormCheckout: React.FC<FormProps> = ({
                 id="country"
                 name="country"
                 className="border border-gray-300 text-gray-900 text-[0.5rem] md:text-[1rem] rounded-lg block w-full p-[5px] md:p-[10px]"
+                onChange={handleCountryChange}
+                value={selectedCountry}
               >
                 <option value="" disabled>
                   Select Country
@@ -154,31 +156,6 @@ const FormCheckout: React.FC<FormProps> = ({
                   </option>
                 ))}
               </Field>
-              <ErrorMessage
-                name="country"
-                component="div"
-                className="text-red-500"
-              />
-            </div>
-
-            <div className="my-2 md:my-4">
-              <label
-                htmlFor="townName"
-                className="block mb-[5px] md:mb-2 text-[0.5rem] md:text-[1rem] font-medium text-gray-900"
-              >
-                Town City
-              </label>
-              <Field
-                type="text"
-                name="townName"
-                className="border border-gray-300 text-gray-900 text-[0.5rem] md:text-[1rem] rounded-lg block w-full p-[5px] md:p-[10px]"
-                
-              />
-              <ErrorMessage
-                name="townName"
-                component="div"
-                className="text-red-500"
-              />
             </div>
             <div className="my-2 md:my-4">
               <label
@@ -190,13 +167,34 @@ const FormCheckout: React.FC<FormProps> = ({
               <Field
                 type="text"
                 name="province"
+                value= {selectedProvince}
+                disabled
                 className="border border-gray-300 text-gray-900 text-[0.5rem] md:text-[1rem] rounded-lg block w-full p-[5px] md:p-[10px]"
-                
               />
               <ErrorMessage
                 name="province"
                 component="div"
-                className="text-red-500"
+                className="text-red-500 text-[0.5rem] md:text-[1rem]"
+              />
+            </div>
+            <div className="my-2 md:my-4">
+              <label
+                htmlFor="townName"
+                className="block mb-[5px] md:mb-2 text-[0.5rem] md:text-[1rem] font-medium text-gray-900"
+              >
+                Town City
+              </label>
+              <Field
+                type="text"
+                name="townName"
+                value= {selectedTown}
+                disabled
+                className="border border-gray-300 text-gray-900 text-[0.5rem] md:text-[1rem] rounded-lg block w-full p-[5px] md:p-[10px]"
+              />
+              <ErrorMessage
+                name="townName"
+                component="div"
+                className="text-red-500 text-[0.5rem] md:text-[1rem]"
               />
             </div>
             <div className="my-2 md:my-4">
@@ -207,14 +205,16 @@ const FormCheckout: React.FC<FormProps> = ({
                 Zip Code
               </label>
               <Field
-                type="number"
+                type="text"
                 name="zipCode"
+                value= {selectedZipCode}
+                disabled
                 className="border border-gray-300 text-gray-900 text-[0.5rem] md:text-[1rem] rounded-lg block w-full p-[5px] md:p-[10px]"
               />
               <ErrorMessage
                 name="zipCode"
                 component="div"
-                className="text-red-500"
+                className="text-red-500 text-[0.5rem] md:text-[1rem]"
               />
             </div>
             <div className="my-2 md:my-4">
@@ -232,7 +232,7 @@ const FormCheckout: React.FC<FormProps> = ({
               <ErrorMessage
                 name="phone"
                 component="div"
-                className="text-red-500"
+                className="text-red-500 text-[0.5rem] md:text-[1rem]"
               />
             </div>
             <div className="my-2 md:my-4">
@@ -246,21 +246,16 @@ const FormCheckout: React.FC<FormProps> = ({
                 type="email"
                 name="email"
                 className="border border-gray-300 text-gray-900 text-[0.5rem] md:text-[1rem] rounded-lg block w-full p-[5px] md:p-[10px]"
-                
               />
               <ErrorMessage
                 name="email"
                 component="div"
-                className="text-red-500"
+                className="text-red-500 text-[0.5rem] md:text-[1rem]"
               />
             </div>
           </div>
           <div className="m-4 md:m-[30px]">
-            <Details
-              itemCart={itemCart}
-              qty={qty}
-              subtotal={subtotal}
-            />
+            <Details itemCart={itemCart} qty={qty} subtotal={subtotal} />
             <div className="flex justify-center items-center">
               <button
                 type="submit"

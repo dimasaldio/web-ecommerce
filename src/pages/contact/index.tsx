@@ -14,10 +14,10 @@ export default function Contact() {
     router.pathname.replace(/^\//, "").charAt(0).toUpperCase() +
     router.pathname.slice(2);
   return (
-    <div className="container mx-auto bg-white">
+    <div className="container mx-auto bg-white h-screen">
       <Layout>
         <HeaderShop path={path} />
-        <div className="grid grid-cols-2 md:p-8">
+        <div className="grid grid-cols-2 md:p-8 ">
           <div className="col-span-2 text-black mx-8 my-4 md:my-8">
             <p className="font-bold text-[0.7rem] md:text-[2rem] text-center">
               Get In Touch With Us

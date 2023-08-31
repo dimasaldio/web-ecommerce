@@ -22,7 +22,7 @@ export default function Cart() {
   }, []);
  
   return (
-    <div className="container mx-auto bg-white relative">
+    <div className="container mx-auto bg-white relative h-screen">
       <Layout>
         <HeaderShop path={path} />
         {subtotal && qty && <CartItem itemCart={itemCart} qty={qty} subtotal={subtotal} />}

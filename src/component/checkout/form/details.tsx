@@ -62,7 +62,7 @@ interface DetailsProps {
             Direct Bank Transfer
           </label>
         </div>
-        <ErrorMessage name="typePayment" component="div" className="text-red-500" />
+        <ErrorMessage name="typePayment" component="div" className="text-red-500 text-[0.5rem] md:text-[1rem]" />
         <p className="text-[0.4rem] md:text-[0.8rem] text-gray-400 font-light mb-[10px]">
           Make your payment directly into our bank account. Please use your
           Order ID as the payment reference. Your order will not be shipped
@@ -83,7 +83,7 @@ interface DetailsProps {
             Cash on Delivery
           </label>
         </div>
-        <ErrorMessage name="typePayment" component="div" className="text-red-500" />
+        <ErrorMessage name="typePayment" component="div" className="text-red-500 text-[0.5rem] md:text-[1rem]" />
         <p className="text-[0.4rem] md:text-[0.8rem] text-gray-500 py-[10px]">
           Your personal data will be used to support your experience throughout
           this website, to manage access to your account, and for other purposes

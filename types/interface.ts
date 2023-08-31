@@ -17,7 +17,14 @@ export interface IProduct {
 }
 
 export interface ICountries {
-  name: string
+  name: string;
+  towns: ITown[];
+}
+
+export interface ITown {
+  name: string;
+  province: string;
+  zipCode: string;
 }
 
 export interface IBillingDetails {

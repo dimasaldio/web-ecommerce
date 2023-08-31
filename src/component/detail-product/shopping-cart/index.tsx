@@ -76,7 +76,7 @@ interface IShoppingCart {
                             props.setItemCart(undefined);
                         }}
                       >
-                        <img src={close} width={10} height={10} alt="close" className='md:w-[20px] h-auto' />
+                        <Image src={close} width={10} height={10} alt="close" className='md:w-[20px] h-auto' />
                       </button>
                     </div>
                   </div>
